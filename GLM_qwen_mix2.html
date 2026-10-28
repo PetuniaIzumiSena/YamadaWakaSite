@@ -1,0 +1,1383 @@
+<!doctype html>
+<!--
+  ============================================================================
+  Waka Yamada – Pianistin & Klavierlehrerin / Pianist & Piano Teacher
+  Statische Ein-Seiten-Website · Static one-page website
+  ============================================================================
+  APACHE / BEREITSTELLUNG (Deployment):
+
+  1. Diese Datei als "index.html" in das DocumentRoot des Apachen legen
+     (z. B. /var/www/html/ oder .../htdocs/).
+  2. Optional die folgende Datei als ".htaccess" in dasselbe Verzeichnis
+     legen (aktiviert UTF-8, Komprimierung und Browser-Caching):
+
+        AddDefaultCharset UTF-8
+        Options -Indexes
+
+        <IfModule mod_deflate.c>
+          AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml
+        </IfModule>
+
+        <IfModule mod_expires.c>
+          ExpiresActive On
+          ExpiresByType text/html "access plus 0 seconds"
+          ExpiresByType text/css "access plus 1 month"
+          ExpiresByType application/javascript "access plus 1 month"
+          ExpiresByType image/svg+xml "access plus 1 month"
+        </IfModule>
+
+  3. Porträtfoto als "images/waka-yamada.jpg" neben diese Datei legen
+     (z. B. das Foto aus dem Poster). Bis dahin zeigt die Seite einen
+     dezenter Platzhalter.
+  ============================================================================
+-->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waka Yamada – Pianistin &amp; Klavierlehrerin · Frankfurt am Main &amp; Eschborn</title>
+<meta name="description" content="Klavierunterricht auf Deutsch und Japanisch in Frankfurt am Main und Eschborn – für jedes Alter und jede Stufe. Konzert- und Unterrichtsanfragen an Pianistin Waka Yamada.">
+<meta name="theme-color" content="#f8f4ec">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='%23a9666d'%3E%3Cpath d='M12 12C10.2 8.9 10.6 5.7 12 3.5c1.4 2.2 1.8 5.4 0 8.5z'/%3E%3Cpath d='M12 12C10.2 8.9 10.6 5.7 12 3.5c1.4 2.2 1.8 5.4 0 8.5z' transform='rotate(72 12 12)'/%3E%3Cpath d='M12 12C10.2 8.9 10.6 5.7 12 3.5c1.4 2.2 1.8 5.4 0 8.5z' transform='rotate(144 12 12)'/%3E%3Cpath d='M12 12C10.2 8.9 10.6 5.7 12 3.5c1.4 2.2 1.8 5.4 0 8.5z' transform='rotate(216 12 12)'/%3E%3Cpath d='M12 12C10.2 8.9 10.6 5.7 12 3.5c1.4 2.2 1.8 5.4 0 8.5z' transform='rotate(288 12 12)'/%3E%3C/g%3E%3Ccircle cx='12' cy='12' r='1.8' fill='%23a8875a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Karla:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ==========================================================================
+   Grundlagen / Basics
+   ========================================================================== */
+:root{
+  --bg:#f8f4ec;            /* warmes Elfenbein / warm ivory */
+  --bg-alt:#fffdf8;
+  --card:#fffdf9;
+  --ink:#37322b;
+  --ink-soft:#6f6557;
+  --green:#3e5548;         /* tiefes Grün / deep green (old money) */
+  --green-deep:#33473c;
+  --pine:#4e7370; --pine-deep:#31504d; --pine-ink:#22403d;
+  --akane:#96262e; --sakura:#e3b6c2; --sakura-soft:#f3e2e7;
+  --rose:#c98f95;          /* Sakura-Rosa / cherry-blossom rose */
+  --rose-deep:#a9666d;
+  --gold:#a8875a;          /* gedämpftes Gold / muted gold */
+  --gold-deep:#8f7148;
+  --line:#e6dcc9;
+  --line-soft:#efe7d8;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(70,60,40,.08);
+  --ff-display:'Cormorant Garamond','Noto Serif JP','Hiragino Mincho ProN','Yu Mincho',Georgia,serif;
+  --ff-body:'Karla','Noto Serif JP','Hiragino Kaku Gothic ProN',system-ui,sans-serif;
+}
+/* Japanischer Modus: elegante Serifen für alles / Japanese mode: elegant serif everywhere */
+html[lang="ja"]{
+  --ff-display:'Noto Serif JP','Hiragino Mincho ProN','Yu Mincho',serif;
+  --ff-body:'Noto Serif JP','Hiragino Mincho ProN','Yu Mincho',serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--ff-body);font-size:16.5px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%}
+.container{max-width:1120px;margin-inline:auto;padding-inline:clamp(18px,4vw,28px)}
+::selection{background:#efd7d9}
+:focus-visible{outline:2.5px solid var(--gold);outline-offset:3px;border-radius:6px}
+
+/* Für empfindsame Personen: sanfte Farben, keine heftige Bewegung.
+   For sensitive visitors: calm colours, no harsh motion. */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  html{scroll-behavior:auto}
+  .petals{display:none}
+}
+
+.skip{position:fixed;left:16px;top:-70px;z-index:100;background:var(--green);color:#f6f1e6;
+  padding:10px 18px;border-radius:999px;font-size:14px;text-decoration:none;transition:top .25s}
+.skip:focus{top:14px}
+
+/* ==========================================================================
+   Kicker, Überschriften, Buttons
+   ========================================================================== */
+.kicker{
+  display:inline-flex;align-items:center;gap:10px;margin:0;
+  font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--gold-deep);
+}
+.kicker::before{
+  content:"";width:15px;height:15px;flex:0 0 auto;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='%23c98f95'%3E%3Cpath d='M12 12C10.2 8.9 10.6 5.7 12 3.5c1.4 2.2 1.8 5.4 0 8.5z'/%3E%3Cpath d='M12 12C10.2 8.9 10.6 5.7 12 3.5c1.4 2.2 1.8 5.4 0 8.5z' transform='rotate(72 12 12)'/%3E%3Cpath d='M12 12C10.2 8.9 10.6 5.7 12 3.5c1.4 2.2 1.8 5.4 0 8.5z' transform='rotate(144 12 12)'/%3E%3Cpath d='M12 12C10.2 8.9 10.6 5.7 12 3.5c1.4 2.2 1.8 5.4 0 8.5z' transform='rotate(216 12 12)'/%3E%3Cpath d='M12 12C10.2 8.9 10.6 5.7 12 3.5c1.4 2.2 1.8 5.4 0 8.5z' transform='rotate(288 12 12)'/%3E%3C/g%3E%3Ccircle cx='12' cy='12' r='1.7' fill='%23a8875a'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+html[lang="ja"] .kicker{letter-spacing:.32em}
+.section-head h2,.contact-copy h2{
+  font-family:var(--ff-display);font-weight:500;
+  font-size:clamp(1.85rem,3.6vw,2.6rem);line-height:1.22;
+  color:var(--green-deep);margin:16px 0 0;
+}
+.section-intro{max-width:64ch;font-size:1.06rem;line-height:1.8;color:#544c40;margin:18px 0 0}
+html[lang="ja"] .section-intro,html[lang="ja"] p{line-height:1.95}
+
+.btn{
+  display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border-radius:999px;
+  font-family:var(--ff-body);font-size:15px;font-weight:600;letter-spacing:.02em;
+  text-decoration:none;cursor:pointer;border:1.5px solid transparent;
+  transition:transform .25s ease,background .25s ease,color .25s ease,border-color .25s ease,box-shadow .25s ease;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.btn-primary{background:var(--green);color:#f6f1e6;box-shadow:0 8px 20px rgba(62,85,72,.22)}
+.btn-primary:hover{background:var(--green-deep)}
+.btn-ghost{border-color:#cdb388;color:#7c6234;background:transparent}
+.btn-ghost:hover{background:#fffdf8;border-color:var(--gold)}
+.btn-sm{padding:9px 18px;font-size:13.5px}
+html[lang="ja"] .btn{letter-spacing:.1em}
+
+.icon{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.icon-sm{width:16px;height:16px}
+
+/* ==========================================================================
+   Header & Navigation
+   ========================================================================== */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(248,244,236,.94);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line-soft);
+  transition:box-shadow .3s;
+}
+.site-header.scrolled{box-shadow:0 6px 24px rgba(80,66,44,.07)}
+.header-inner{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-block:12px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.seal{
+  width:36px;height:36px;border-radius:11px;flex:0 0 auto;
+  background:var(--rose-deep);color:#fdf6ee;
+  font-family:'Noto Serif JP','Hiragino Mincho ProN',serif;font-weight:700;font-size:19px;
+  display:grid;place-items:center;transform:rotate(-4deg);
+  box-shadow:0 3px 10px rgba(169,102,109,.35);
+}
+.brand-text{display:flex;flex-direction:column;line-height:1.15}
+.brand-text .b-en{font-family:var(--ff-display);font-weight:600;font-size:19px;letter-spacing:.04em;color:var(--green-deep)}
+.brand-text .b-jp{font-size:11px;letter-spacing:.3em;color:var(--gold-deep);margin-top:2px}
+.main-nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.main-nav a{
+  padding:8px 13px;font-size:14.5px;font-weight:500;color:var(--ink-soft);
+  text-decoration:none;border-radius:999px;transition:color .25s,background .25s,box-shadow .25s;
+}
+.main-nav a:hover{color:var(--green-deep);background:rgba(255,255,255,.7)}
+.main-nav a.is-active{color:var(--green-deep);background:#fffdf8;box-shadow:inset 0 0 0 1px var(--line)}
+.lang-switch{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:#fffdf8}
+.lang-btn{
+  border:0;background:transparent;padding:7px 13px;cursor:pointer;
+  font-family:var(--ff-body);font-weight:600;font-size:12.5px;letter-spacing:.06em;color:var(--ink-soft);
+  transition:background .25s,color .25s;
+}
+.lang-btn:hover{color:var(--green-deep)}
+.lang-btn.is-active{background:var(--green);color:#f6f1e6}
+@media(max-width:860px){
+  .main-nav{order:3;flex-basis:100%;justify-content:center;overflow-x:auto}
+}
+
+/* ── Hero qwen ── */
+.heroq{
+  position:relative;color:#f6f2e8;overflow:hidden;
+  background:linear-gradient(160deg,var(--pine) 0%,var(--pine-deep) 62%,var(--pine-ink) 100%);
+}
+.heroq-inner{max-width:1060px;margin:0 auto;padding:84px 22px 96px;position:relative}
+.heroq .kickerq{color:var(--sakura);letter-spacing:.34em;font-size:13px;text-transform:uppercase}
+.heroq h1{font-family:var(--ff-display);font-weight:500;font-size:clamp(40px,7vw,74px);line-height:1.12;margin:14px 0 2px;letter-spacing:.02em}
+.heroq .school{font-family:'Noto Serif JP','Hiragino Mincho ProN',serif;font-size:clamp(17px,2.4vw,23px);letter-spacing:.22em;color:#e9e2d2;margin-bottom:22px}
+.heroq .tagline{font-family:var(--ff-display);font-style:italic;font-size:clamp(18px,2.6vw,25px);color:var(--sakura);max-width:34ch}
+.heroq .cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{
+  display:inline-block;text-decoration:none;border-radius:999px;padding:12px 26px;
+  letter-spacing:.12em;font-size:15px;transition:transform .25s,box-shadow .25s,background .25s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-solid{background:var(--sakura);color:var(--pine-ink)}
+.btn-solid:hover{box-shadow:0 8px 22px rgba(0,0,0,.22)}
+.btn-ghost{border:1px solid rgba(246,242,232,.65);color:#f6f2e8}
+.btn-ghost:hover{background:rgba(246,242,232,.12)}
+.tategaki{
+  position:absolute;right:34px;top:70px;writing-mode:vertical-rl;
+  font-size:20px;letter-spacing:.3em;color:rgba(246,242,232,.75);
+}
+.sakura-mark{position:absolute;left:-30px;bottom:110px;width:150px;height:150px;color:rgba(227,182,194,.16);transform:rotate(-14deg)}
+.notes-row{margin-top:26px;font-size:15px;letter-spacing:.6em;color:rgba(246,242,232,.55)}
+/* piano keyboard divider */
+.keys{position:relative;height:64px;background:repeating-linear-gradient(90deg,#fbf8f0 0 43px,#cfc7b6 43px 44px);border-top:3px solid var(--akane)}
+.keys::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:58%;
+  background:repeating-linear-gradient(90deg,
+    transparent 0 36px,#20262a 36px 52px,
+    transparent 52px 80px,#20262a 80px 96px,
+    transparent 96px 168px,#20262a 168px 184px,
+    transparent 184px 212px,#20262a 212px 228px,
+    transparent 228px 256px,#20262a 256px 272px,
+    transparent 272px 308px);
+  border-radius:0 0 3px 3px;
+}
+  
+  /* ==========================================================================
+   Hero
+   ========================================================================== */
+.hero{
+  position:relative;overflow:hidden;border-bottom:1px solid var(--line-soft);
+  background:
+    radial-gradient(900px 500px at 85% -10%, #f3ead9 0%, transparent 60%),
+    linear-gradient(180deg,#faf6ee 0%,#f6f0e4 100%);
+}
+.hero-grid{
+  position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;
+  gap:clamp(32px,5vw,64px);align-items:center;
+  padding-block:clamp(56px,9vw,104px);
+}
+.hero-copy .kicker{margin-bottom:18px}
+.hero-name{
+  font-family:var(--ff-display);font-weight:500;margin:0 0 8px;
+  font-size:clamp(2.7rem,6.2vw,4.4rem);line-height:1.04;color:var(--ink);
+}
+.hero-name-jp{
+  display:block;margin-top:14px;
+  font-family:'Noto Serif JP','Hiragino Mincho ProN',serif;font-weight:500;
+  font-size:clamp(1.05rem,2vw,1.3rem);letter-spacing:.5em;color:var(--rose-deep);
+}
+.hero-line{
+  font-family:var(--ff-display);font-style:italic;
+  font-size:clamp(1.15rem,2.2vw,1.42rem);line-height:1.55;color:#5a5245;
+  max-width:36ch;margin:22px 0 12px;
+}
+html[lang="ja"] .hero-line{font-style:normal;line-height:1.9}
+.hero-loc{display:flex;align-items:center;gap:8px;font-weight:600;font-size:14.5px;letter-spacing:.08em;color:var(--green);margin:0 0 20px}
+.hero-chips{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 30px;padding:0;list-style:none}
+.chip{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#fffdf8;border:1px solid var(--line);border-radius:999px;
+  padding:7px 15px;font-size:13px;font-weight:500;color:var(--ink-soft);
+}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--rose);flex:0 0 auto}
+.chip--green::before{background:var(--green)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px}
+.hero-art{max-width:520px;justify-self:center;width:100%}
+.hero-art svg{width:100%;height:auto;display:block}
+.hero-side{
+  position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  writing-mode:vertical-rl;font-family:'Noto Serif JP',serif;
+  font-size:13px;letter-spacing:.5em;color:var(--rose-deep);opacity:.85;
+}
+@media(max-width:1220px){.hero-side{display:none}}
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-art{max-width:360px}
+}
+
+/* Sanft fallende Blütenblätter / gently falling petals */
+.petals{position:absolute;inset:0;pointer-events:none;z-index:0}
+.petal{
+  position:absolute;top:-26px;width:15px;height:15px;opacity:0;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 0c4.2 4.6 4.6 10.4 0 20-4.6-9.6-4.2-15.4 0-20z' fill='%23d8a6ad'/%3E%3C/svg%3E") center/contain no-repeat;
+  animation:fall linear infinite;
+}
+.petal:nth-child(1){left:12%;animation-duration:26s;animation-delay:-4s}
+.petal:nth-child(2){left:38%;width:11px;height:11px;animation-duration:34s;animation-delay:-18s}
+.petal:nth-child(3){left:70%;width:13px;height:13px;animation-duration:30s;animation-delay:-11s}
+.petal:nth-child(4){left:88%;width:10px;height:10px;animation-duration:38s;animation-delay:-25s}
+@keyframes fall{
+  0%{transform:translate(0,0) rotate(0deg);opacity:0}
+  8%{opacity:.5}
+  85%{opacity:.4}
+  100%{transform:translate(70px,640px) rotate(320deg);opacity:0}
+}
+
+/* Sanft schwebende Blüten in der Illustration / gently floating blossoms */
+.floaty{transform-box:fill-box;transform-origin:center;animation:floaty 7s ease-in-out infinite alternate}
+.f2{animation-duration:8.5s;animation-delay:-2s}
+.f3{animation-duration:9.5s;animation-delay:-4s}
+.f4{animation-duration:8s;animation-delay:-1s}
+.f5{animation-duration:10s;animation-delay:-3s}
+.f6{animation-duration:9s;animation-delay:-5s}
+.f7{animation-duration:8s;animation-delay:-2.5s}
+@keyframes floaty{from{transform:translateY(0) rotate(0deg)}to{transform:translateY(-9px) rotate(3deg)}}
+
+/* ==========================================================================
+   Abschnitte allgemein / sections
+   ========================================================================== */
+section{padding-block:clamp(60px,9vw,104px);scroll-margin-top:84px;position:relative}
+.section-alt{background:var(--bg-alt);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+
+.ornament{display:flex;align-items:center;gap:16px;max-width:380px;margin:56px auto 0}
+.ornament .o-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,#d9caab)}
+.ornament .o-line:last-child{background:linear-gradient(90deg,#d9caab,transparent)}
+.ornament svg{width:30px;height:30px;color:var(--gold);flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
+
+.sub-head{text-align:center;margin-top:58px}
+.sub-head .kicker{justify-content:center}
+.sub-head h3{font-family:var(--ff-display);font-size:1.75rem;font-weight:600;color:var(--green-deep);margin:12px 0 0}
+
+/* ==========================================================================
+   Über mich / About
+   ========================================================================== */
+.about-grid{
+  display:grid;grid-template-columns:330px 1fr;gap:clamp(36px,5vw,64px);
+  align-items:start;margin-top:44px;
+}
+@media(max-width:880px){.about-grid{grid-template-columns:1fr;max-width:560px;margin-inline:auto;margin-top:36px}}
+.portrait{
+  position:relative;aspect-ratio:4/5;overflow:hidden;
+  border-radius:190px 190px 20px 20px;
+  border:1px solid var(--line);box-shadow:var(--shadow);
+  background:linear-gradient(170deg,#f3ecdf,#ebe0cc);
+}
+.portrait img{width:100%;height:100%;object-fit:cover;display:block}
+.portrait .ph{display:none}
+.portrait.no-photo img{display:none}
+.portrait.no-photo .ph{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;height:100%;text-align:center;padding:20px;
+}
+.seal-lg{
+  width:76px;height:76px;border-radius:22px;background:var(--rose-deep);color:#fdf6ee;
+  font-family:'Noto Serif JP',serif;font-weight:700;font-size:36px;
+  display:grid;place-items:center;transform:rotate(-4deg);
+}
+.ph small{font-size:12px;color:var(--ink-soft);letter-spacing:.05em;line-height:1.7}
+
+.facts{margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:6px 22px}
+.facts div{display:grid;grid-template-columns:112px 1fr;gap:14px;padding:13px 0;border-bottom:1px solid var(--line-soft)}
+.facts div:last-child{border-bottom:0}
+.facts dt{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);font-weight:700;padding-top:3px;margin:0}
+html[lang="ja"] .facts dt{letter-spacing:.22em}
+.facts dd{font-size:14.5px;color:var(--ink);line-height:1.65;margin:0}
+
+.bio p{font-size:1.03rem;line-height:1.85;color:#4c453a;margin:0 0 1.15em;max-width:66ch}
+html[lang="ja"] .bio p{line-height:2.05}
+.bio > p:first-child::first-letter{
+  font-family:var(--ff-display);font-weight:600;font-size:3.3em;line-height:.8;
+  float:left;padding:7px 12px 0 0;color:var(--green);
+}
+html[lang="ja"] .bio > p:first-child::first-letter{
+  font-size:inherit;line-height:inherit;float:none;padding:0;color:inherit;font-weight:inherit;font-family:inherit;
+}
+
+/* ==========================================================================
+   Unterricht / Lessons
+   ========================================================================== */
+.has-spine{position:relative}
+.spine{display:none}
+@media(min-width:1024px){
+  .has-spine{padding-right:130px}
+  .spine{display:flex;flex-direction:column;align-items:center;gap:16px;position:absolute;right:0;top:6px}
+  .spine-seal{
+    width:30px;height:30px;border-radius:9px;background:var(--rose-deep);color:#fdf6ee;
+    font-family:'Noto Serif JP',serif;font-weight:700;font-size:16px;
+    display:grid;place-items:center;transform:rotate(-4deg);
+  }
+  .spine-text{writing-mode:vertical-rl;font-family:'Noto Serif JP',serif;font-size:14px;letter-spacing:.45em;color:var(--rose-deep)}
+}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:44px}
+@media(max-width:1020px){.features{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.features{grid-template-columns:1fr}}
+.feature{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 24px;
+  transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+}
+.feature:hover{transform:translateY(-4px);border-color:#d8c6a4;box-shadow:var(--shadow)}
+.f-ico{
+  width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
+  background:#f4ecdd;color:#54685b;border:1px solid #e8ddc6;
+}
+.feature h3{font-family:var(--ff-display);font-size:1.28rem;font-weight:600;color:var(--green-deep);margin:16px 0 8px}
+.feature p{font-size:14.6px;line-height:1.72;color:var(--ink-soft);margin:0}
+html[lang="ja"] .feature p{line-height:1.95}
+
+.quote{margin:52px auto 0;max-width:620px;text-align:center}
+.quote .bloom{width:22px;height:22px;margin:0 auto 14px;display:block}
+.quote blockquote{
+  font-family:var(--ff-display);font-style:italic;margin:0;
+  font-size:clamp(1.2rem,2.4vw,1.42rem);line-height:1.6;color:#4c5f52;
+}
+html[lang="ja"] .quote blockquote{font-style:normal;line-height:2}
+
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:780px;margin:40px auto 0}
+@media(max-width:660px){.prices{grid-template-columns:1fr;max-width:360px}}
+.price-card{
+  position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:32px 18px 30px;text-align:center;
+  transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+}
+.price-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:#d8c6a4}
+.p-dur{font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 14px}
+.p-amount{font-family:var(--ff-display);font-size:2.55rem;font-weight:600;color:var(--green-deep);margin:0;line-height:1}
+.price-card.featured{border-color:#cdb388;box-shadow:0 0 0 1px #cdb388,var(--shadow);transform:translateY(-6px)}
+.price-card.featured:hover{transform:translateY(-8px)}
+@media(max-width:660px){.price-card.featured{transform:none}.price-card.featured:hover{transform:translateY(-4px)}}
+.price-badge{
+  position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+  background:var(--gold);color:#fffdf6;font-size:11px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;padding:5px 14px;border-radius:999px;
+  box-shadow:0 4px 12px rgba(168,135,90,.35);white-space:nowrap;
+}
+.prices-note{text-align:center;font-size:14px;color:var(--ink-soft);margin:24px auto 0;line-height:1.75;max-width:56ch}
+
+.loc-box{
+  display:flex;gap:16px;align-items:flex-start;max-width:580px;
+  margin:44px auto 0;background:#fbf7ee;border:1px dashed #d9caab;
+  border-radius:18px;padding:20px 24px;
+}
+.loc-box .icon{margin-top:3px;color:var(--green);flex:0 0 auto}
+.loc-box h3{font-family:var(--ff-display);font-size:1.18rem;font-weight:600;color:var(--green-deep);margin:0 0 4px}
+.loc-box p{font-size:14.6px;color:var(--ink-soft);margin:0;line-height:1.75}
+
+/* ==========================================================================
+   Als Pianistin / Performances
+   ========================================================================== */
+#pianist{overflow:hidden}
+.watermark{
+  position:absolute;top:20px;right:-30px;pointer-events:none;user-select:none;
+  font-family:'Noto Serif JP',serif;font-size:clamp(160px,24vw,300px);
+  line-height:1;color:rgba(62,85,72,.05);
+}
+.p-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;list-style:none;padding:0}
+.quote-frame{
+  position:relative;max-width:660px;margin:52px auto 0;
+  padding:clamp(30px,5vw,52px);border:1px solid #cdb388;border-radius:8px;background:#fffdf9;
+}
+.quote-frame::before{content:"";position:absolute;inset:7px;border:1px solid #e4d3ac;border-radius:4px;pointer-events:none}
+.quote-frame blockquote{
+  font-family:var(--ff-display);font-style:italic;margin:0;text-align:center;
+  font-size:clamp(1.2rem,2.6vw,1.5rem);line-height:1.65;color:#3f5145;
+}
+html[lang="ja"] .quote-frame blockquote{font-style:normal;line-height:2}
+.quote-frame figcaption{
+  text-align:center;margin-top:18px;font-size:12px;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);
+}
+.pianist-cta{text-align:center;margin-top:40px}
+
+/* ==========================================================================
+   Konzerte / Concerts
+   ========================================================================== */
+.concert-list{display:grid;gap:16px;margin:40px auto 0;max-width:720px}
+.concert-empty{
+  display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;
+  border:1.5px dashed #d9cdb8;border-radius:18px;padding:46px 26px;
+  background:rgba(255,253,248,.65);color:var(--ink-soft);
+  font-size:15px;line-height:1.85;max-width:620px;margin:40px auto 0;
+}
+.concert-empty .bloom{width:24px;height:24px}
+.concert-card{
+  display:flex;gap:24px;align-items:center;background:var(--card);
+  border:1px solid var(--line);border-radius:18px;padding:22px 26px;
+  transition:box-shadow .3s ease,border-color .3s ease;
+}
+.concert-card:hover{box-shadow:var(--shadow);border-color:#d8c6a4}
+.c-date{display:flex;flex-direction:column;align-items:center;min-width:80px;padding-right:22px;border-right:1px solid var(--line)}
+.c-day{font-family:var(--ff-display);font-size:2.5rem;font-weight:600;color:var(--green-deep);line-height:1}
+.c-rest{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);margin-top:5px}
+.c-title{font-family:var(--ff-display);font-size:1.3rem;font-weight:600;color:var(--ink);margin:0 0 6px}
+.c-meta{font-size:14px;color:var(--ink-soft);margin:0 0 8px}
+.c-link{font-size:14px;font-weight:600;color:var(--green);text-decoration:none;border-bottom:1px solid #c9d6cb}
+.c-link:hover{color:var(--green-deep)}
+@media(max-width:520px){
+  .concert-card{flex-direction:column;align-items:flex-start}
+  .c-date{border-right:0;border-bottom:1px solid var(--line);padding:0 0 12px;flex-direction:row;gap:10px;align-items:baseline}
+}
+
+/* ==========================================================================
+   Kontakt / Contact
+   ========================================================================== */
+.contact-card{
+  position:relative;overflow:hidden;background:var(--card);
+  border:1px solid var(--line);border-radius:24px;
+  padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:1.1fr .9fr;
+  gap:clamp(28px,4vw,56px);margin-top:44px;box-shadow:var(--shadow);
+}
+.contact-card::before{
+  content:"";position:absolute;top:-120px;right:-120px;width:340px;height:340px;
+  border-radius:50%;background:radial-gradient(circle,#f2dfe0 0%,transparent 70%);
+  opacity:.75;pointer-events:none;
+}
+@media(max-width:820px){.contact-card{grid-template-columns:1fr}}
+.contact-text{font-size:1rem;line-height:1.8;color:#544c40;margin:16px 0 0}
+.c-row{display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--line-soft)}
+.c-row:first-child{padding-top:6px}
+.c-row:last-child{border-bottom:0}
+.row-ico{flex:0 0 42px;width:42px;height:42px;border-radius:13px;background:#f4ecdd;color:#54685b;display:grid;place-items:center;border:1px solid #e8ddc6}
+.row-label{font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);margin:0 0 4px}
+.row-value{font-size:15px;color:var(--ink);margin:0 0 10px;font-weight:500;overflow-wrap:anywhere}
+.row-value:last-child{margin-bottom:0}
+.row-value a{color:var(--green);text-decoration:none;border-bottom:1px solid #c9d6cb}
+.row-value a:hover{color:var(--green-deep)}
+.row-actions{display:flex;flex-wrap:wrap;gap:10px}
+  
+/* Contact */
+.contact-card2{
+  text-align:center;background:linear-gradient(165deg,var(--pine-deep),var(--pine-ink));
+  color:#f6f2e8;border-radius:20px;padding:56px 30px;position:relative;overflow:hidden;
+}
+.contact-card2 h2{color:#f6f2e8}
+.contact-card2 h2::before{color:var(--sakura)}
+.contact-card2 .rule{margin-left:auto;margin-right:auto}
+.contact-card2 p{max-width:56ch;margin:0 auto 12px;color:#e7e0d0}
+.contact-card2 .btn-solid{margin-top:22px;font-size:17px;padding:14px 34px}
+.contact-card2 .mail{display:block;margin-top:14px;font-size:15px;color:var(--sakura);letter-spacing:.06em}
+.contact-card2 .sakura-mark{left:auto;right:-40px;bottom:-40px;width:180px;height:180px;color:rgba(227,182,194,.12)}
+
+/* Footer GLM */
+footer{background:var(--pine-ink);color:#cfd8d2;padding:34px 0;text-align:center;font-size:14px;letter-spacing:.1em}
+footer .f-notes{color:var(--sakura);letter-spacing:.5em;margin-bottom:8px}
+  
+  /* ==========================================================================
+   Footer, Toast
+   ========================================================================== */
+.site-footer{border-top:1px solid var(--line);background:#f5f0e5;padding:46px 0 42px;text-align:center}
+.footer-seal{
+  width:40px;height:40px;border-radius:12px;background:var(--rose-deep);color:#fdf6ee;
+  font-family:'Noto Serif JP',serif;font-weight:700;font-size:20px;
+  display:grid;place-items:center;margin:0 auto 14px;transform:rotate(-4deg);
+}
+.footer-name{font-family:var(--ff-display);font-size:1.35rem;color:var(--green-deep);font-weight:600;margin:0}
+.footer-name2{font-family:var(--ff-display);font-size:1.35rem;color:var(#cfd8d2);font-weight:600;margin:0}
+.footer-jp{font-size:12px;letter-spacing:.4em;color:var(--rose-deep);margin:6px 0 0}
+.footer-tag{font-size:13.5px;color:var(--ink-soft);margin:12px 0 0;line-height:1.75}
+.footer-tag2{font-size:13.5px;color:var(--line);margin:12px 0 0;line-height:1.75}
+.footer-copy{font-size:12.5px;color:#9a8f7d;margin:18px 0 0}
+.footer-copy2{font-size:12.5px;color:var(--line);margin:18px 0 0}
+
+.toast{
+  position:fixed;left:50%;bottom:26px;transform:translate(-50%,14px);
+  background:#37322b;color:#f6f1e6;padding:11px 22px;border-radius:999px;
+  font-size:14px;font-weight:500;opacity:0;pointer-events:none;z-index:80;
+  box-shadow:0 10px 30px rgba(40,32,20,.25);
+  transition:opacity .35s ease,transform .35s ease;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media print{
+  .site-header,.petals,.hero-art,.spine,.toast,.lang-switch,.main-nav,.watermark{display:none!important}
+  body{background:#fff}
+  section{padding-block:24px}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main" data-i18n="skip">Zum Inhalt springen</a>
+
+<!-- ======================= HEADER ======================= -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a class="brand" href="#start">
+      <span class="seal" aria-hidden="true">和</span>
+      <span class="brand-text">
+        <span class="b-en">Waka Yamada</span>
+        <span class="b-jp" lang="ja">山田和佳</span>
+      </span>
+    </a>
+    <nav class="main-nav" data-i18n-aria="nav_aria" aria-label="Hauptnavigation">
+      <a href="#about" data-i18n="nav_about">Über mich</a>
+      <a href="#lessons" data-i18n="nav_lessons">Unterricht</a>
+      <a href="#pianist" data-i18n="nav_pianist">Als Pianistin</a>
+      <a href="#concerts" data-i18n="nav_concerts">Konzerte</a>
+      <a href="#contact" data-i18n="nav_contact">Kontakt</a>
+    </nav>
+    <div class="lang-switch" role="group" data-i18n-aria="lang_label" aria-label="Sprache wählen">
+      <button class="lang-btn" type="button" data-lang="de" aria-pressed="true">DE</button>
+      <button class="lang-btn" type="button" data-lang="en" aria-pressed="false">EN</button>
+      <button class="lang-btn" type="button" data-lang="ja" aria-pressed="false" lang="ja">日本語</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+ <!-- ═══════════ HERO qwen ═══════════ -->
+<div class="heroq" id="top">
+  <div class="petals" aria-hidden="true">
+    <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
+  </div>
+  <svg class="sakura-mark" viewBox="0 0 40 40" aria-hidden="true"><g fill="currentColor"><ellipse cx="20" cy="11" rx="6.5" ry="9.5"/><ellipse cx="20" cy="11" rx="6.5" ry="9.5" transform="rotate(72 20 20)"/><ellipse cx="20" cy="11" rx="6.5" ry="9.5" transform="rotate(144 20 20)"/><ellipse cx="20" cy="11" rx="6.5" ry="9.5" transform="rotate(216 20 20)"/><ellipse cx="20" cy="11" rx="6.5" ry="9.5" transform="rotate(288 20 20)"/></g><circle cx="20" cy="20" r="3.4" fill="#f6f2e8"/></svg>
+  <div class="heroq-inner">
+    <p class="tategaki" aria-hidden="true">ピアノ一緒に弾いてみませんか？</p>
+    <p class="kickerq" data-i18n="hero_kicker">Pianistin · Klavierlehrerin
+    </p>
+    <h1>Waka Yamada</h1>
+    <p class="school">山田 和佳</p>
+    <p class="tagline" data-i18n="hero_line">Vom ersten Ton bis zur Bühne – einfühlsamer Klavierunterricht und Musik, die bleibt.
+    </p>
+    <p class="notes-row" aria-hidden="true">♩ ♪ ♫ ♬</p>
+    <div class="hero-cta">
+      <a class="btn btn-solid" href="#lessons" data-i18n="hero_cta1">Zum Unterricht</a>
+      <a class="btn btn-ghost" href="#contact" data-i18n="hero_cta2">Kontakt</a>
+    </div>
+  </div>
+  <div class="keys" role="presentation" aria-hidden="true"></div>
+</div>
+  
+  <!-- ======================= HERO ======================= 
+  <section class="hero" id="start">
+    <div class="petals" aria-hidden="true">
+      <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
+    </div>
+    <span class="hero-side" aria-hidden="true">ピアノとともに</span>
+
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="kicker" data-i18n="hero_kicker">Pianistin · Klavierlehrerin</p>
+        <h1 class="hero-name">Waka Yamada<span class="hero-name-jp" lang="ja">山田 和佳</span></h1>
+        <p class="hero-line" data-i18n="hero_line">Vom ersten Ton bis zur Bühne – einfühlsamer Klavierunterricht und Musik, die bleibt.</p>
+        <p class="hero-loc">
+          <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          <span data-i18n="hero_loc">Frankfurt am Main · Eschborn</span>
+        </p>
+        <ul class="hero-chips">
+          <li class="chip" data-i18n="chip1">Deutsch &amp; Japanisch</li>
+          <li class="chip" data-i18n="chip2">Jedes Alter</li>
+          <li class="chip" data-i18n="chip3">Anfänger – Fortgeschrittene</li>
+        </ul>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#lessons" data-i18n="hero_cta1">Zum Unterricht</a>
+          <a class="btn btn-ghost" href="#contact" data-i18n="hero_cta2">Kontakt</a>
+        </div>
+      </div>
+-->
+      <!-- Illustration: Sakura-Zweig über Klaviertasten (Anspielung auf das Poster) 
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <g id="bl-petals">
+              <path d="M0 0C-8 -12 -7 -30 0 -40C7 -30 8 -12 0 0Z"/>
+              <path d="M0 0C-8 -12 -7 -30 0 -40C7 -30 8 -12 0 0Z" transform="rotate(72)"/>
+              <path d="M0 0C-8 -12 -7 -30 0 -40C7 -30 8 -12 0 0Z" transform="rotate(144)"/>
+              <path d="M0 0C-8 -12 -7 -30 0 -40C7 -30 8 -12 0 0Z" transform="rotate(216)"/>
+              <path d="M0 0C-8 -12 -7 -30 0 -40C7 -30 8 -12 0 0Z" transform="rotate(288)"/>
+            </g>
+          </defs>
+          <circle cx="290" cy="268" r="212" fill="#f1e7d7"/>
+          <circle cx="290" cy="268" r="212" fill="none" stroke="#e0d3ba" stroke-width="1.2" stroke-dasharray="2 8"/>
+          <circle cx="290" cy="268" r="184" fill="#f7f0e3"/> -->
+          <!-- Zweig / branch
+          <path d="M52 505C150 470 235 430 296 352S425 205 468 108" fill="none" stroke="#b5a483" stroke-width="4" stroke-linecap="round"/>
+          <path d="M296 352c26-24 48-33 76-36" fill="none" stroke="#b5a483" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M400 232c22-8 36-22 44-40" fill="none" stroke="#b5a483" stroke-width="2.2" stroke-linecap="round"/>
+          <!-- Blüten / blossoms
+          <g class="floaty"><use href="#bl-petals" transform="translate(120 448) scale(.62)" fill="#e3aab1"/><circle cx="120" cy="448" r="4.5" fill="#b98a4e"/></g>
+          <g class="floaty f2"><use href="#bl-petals" transform="translate(226 396) scale(.8)" fill="#d998a0"/><circle cx="226" cy="396" r="5.5" fill="#b98a4e"/></g>
+          <g class="floaty f3"><use href="#bl-petals" transform="translate(316 328) scale(.95)" fill="#e7b7bd"/><circle cx="316" cy="328" r="6.5" fill="#b98a4e"/></g>
+          <g class="floaty f4"><use href="#bl-petals" transform="translate(404 232) scale(.72)" fill="#e3aab1"/><circle cx="404" cy="232" r="5" fill="#b98a4e"/></g>
+          <g class="floaty f5"><use href="#bl-petals" transform="translate(468 130) scale(.9)" fill="#d998a0"/><circle cx="468" cy="130" r="6" fill="#b98a4e"/></g>
+          <circle cx="180" cy="424" r="5" fill="#c98f95"/>
+          <circle cx="365" cy="286" r="4.5" fill="#c98f95"/> -->
+          <!-- Noten / notes
+          <g transform="translate(392 408) rotate(-14)">
+            <g class="floaty f6">
+              <ellipse cx="0" cy="0" rx="9.5" ry="7" fill="#3e5548" transform="rotate(-18)"/>
+              <path d="M8.5 -3V-48" stroke="#3e5548" stroke-width="3.4" stroke-linecap="round"/>
+              <path d="M8.5 -48c11 5 13 15 5 24" fill="none" stroke="#3e5548" stroke-width="3.4" stroke-linecap="round"/>
+            </g>
+          </g>
+          <g transform="translate(452 352) rotate(10)">
+            <g class="floaty f7">
+              <ellipse cx="0" cy="0" rx="7.5" ry="5.6" fill="#a8875a" transform="rotate(-18)"/>
+              <path d="M6.6 -2.4V-38" stroke="#a8875a" stroke-width="2.8" stroke-linecap="round"/>
+              <path d="M6.6 -38c9 4 10.5 12 4 19" fill="none" stroke="#a8875a" stroke-width="2.8" stroke-linecap="round"/>
+            </g>
+          </g> -->
+          <!-- Klaviertasten / piano keys
+          <g transform="translate(158 462)">
+            <rect x="0" y="0" width="264" height="76" rx="10" fill="#fffdf8" stroke="#d8cbb2" stroke-width="1.6"/>
+            <path d="M52.8 0V76M105.6 0V76M158.4 0V76M211.2 0V76" stroke="#e8dfcc" stroke-width="1.4"/>
+            <rect x="44.8" y="0" width="16" height="45" rx="4" fill="#37322b"/>
+            <rect x="97.6" y="0" width="16" height="45" rx="4" fill="#37322b"/>
+            <rect x="203.2" y="0" width="16" height="45" rx="4" fill="#37322b"/>
+            <path d="M14 62h36" stroke="#c9ad7c" stroke-width="2" stroke-linecap="round"/>
+          </g>
+          <circle cx="150" cy="180" r="2.4" fill="#c9ad7c" opacity=".65"/>
+          <circle cx="470" cy="300" r="2" fill="#c9ad7c" opacity=".55"/>
+          <circle cx="240" cy="130" r="2.2" fill="#c9ad7c" opacity=".5"/>
+          <circle cx="520" cy="420" r="2.4" fill="#e3aab1" opacity=".6"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <!-- ======================= ÜBER MICH ======================= -->
+  <section id="about">
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker" data-i18n="about_kicker">Über mich</p>
+        <h2 data-i18n="about_title">Zwischen Tokio und Frankfurt – ein Leben mit dem Klavier</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-media">
+          <!-- Porträt: Foto als "images/waka-yamada.jpg" neben diese Datei legen
+               (z. B. das Foto aus dem Poster). / Place the photo (e.g. from the
+               poster) as "images/waka-yamada.jpg" next to this file. -->
+          <figure class="portrait" style="margin:0">
+            <img src="images/waka-yamada.jpg" alt="Porträt von Waka Yamada" data-i18n-alt="portrait_alt" width="680" height="850" loading="lazy"
+                 onerror="this.closest('.portrait').classList.add('no-photo')">
+            <div class="ph" aria-hidden="true">
+              <span class="seal-lg">和</span>
+              <small>Porträtfoto<br>images/waka-yamada.jpg</small>
+            </div>
+          </figure>
+          <dl class="facts">
+            <div><dt data-i18n="fact1_l">Herkunft</dt><dd data-i18n="fact1_v">Kumamoto, Japan</dd></div>
+            <div><dt data-i18n="fact2_l">Studium</dt><dd data-i18n="fact2_v">Tokyo University of the Arts (Bachelor) · Hochschule für Musik Würzburg (Master)</dd></div>
+            <div><dt data-i18n="fact3_l">Meisterklasse</dt><dd data-i18n="fact3_v">Seit 2025 – nach Masterabschluss mit Bestnote</dd></div>
+            <div><dt data-i18n="fact4_l">Schwerpunkt</dt><dd data-i18n="fact4_v">Robert Schumann · Beethoven · Brahms</dd></div>
+            <div><dt data-i18n="fact5_l">Sprachen</dt><dd data-i18n="fact5_v">Deutsch · Japanisch · Englisch</dd></div>
+          </dl>
+        </div>
+
+        <div class="bio">
+          <p data-i18n="bio1">Meine musikalische Ausbildung begann in Japan, wo meine Eltern mich im Alter von vier Jahren am Klavier unterrichteten. Mein Vater ist Musiklehrer, und Musik spielt in meiner Familie eine zentrale Rolle – alle spielen entweder Klavier oder leben ihre musikalische Ader auf eine andere Weise. So entstand schon früh meine Begeisterung für Musik und für das Klavier.</p>
+          <p data-i18n="bio2">Nach meinem Bachelorabschluss Klavier an der Tokyo University of the Arts im Jahr 2018 war ich in Japan als Klavierlehrerin tätig und unterrichtete Schülerinnen und Schüler aller Kenntnis- und Altersstufen – vom Kindergarten- bis zum Seniorenalter. Parallel dazu arbeitete ich regelmäßig als Begleiterin für Violine und Gesang, gab Solokonzerte und war in verschiedenen kammermusikalischen Projekten aktiv. Ein besonderes Highlight für mich als Pianistin war 2018 ein Konzert im Violine-Klavier-Duo in der Carnegie Hall in New York.</p>
+          <p data-i18n="bio3">Seit 2021 lebe ich in Deutschland. Meine Klavierstudien setzte ich zunächst am Hamburger Konservatorium fort, wo ich meine Ausbildung um das Fach Cembalo erweiterte.</p>
+          <p data-i18n="bio4">Schon seit meiner Schulzeit fühle ich mich besonders der Musik deutscher Komponisten verbunden. Die Möglichkeit, in dem kulturellen Umfeld zu leben und zu studieren, in dem viele dieser Werke entstanden sind, bedeutet mir sehr viel. Besonders intensiv beschäftige ich mich mit der Musik Robert Schumanns, Ludwig van Beethovens und Johannes Brahms'.</p>
+          <p data-i18n="bio5">2023 begann ich mein Masterstudium im Fach Klavier bei Prof. Silke-Thora Matthies an der Hochschule für Musik Würzburg. Dort widmete ich mich neben dem solistischen Repertoire intensiv der Kammermusik und arbeitete mit Studierenden verschiedener Instrumente zusammen.</p>
+          <p data-i18n="bio6">2025 schloss ich mein Studium mit Bestnote ab und begann anschließend ein Meisterklassenstudium, um meine künstlerische Entwicklung weiter zu vertiefen.</p>
+          <p data-i18n="bio7">Neben Studium und Meisterkursen trat ich regelmäßig als Pianistin auf, unter anderem in Hamburg, Braunschweig, Karlstadt und Bayreuth, wo ich in Kirchen, Konzertsälen und sozialen Einrichtungen spielte.</p>
+        </div>
+      </div>
+
+      <div class="ornament" aria-hidden="true">
+        <span class="o-line"></span>
+        <svg viewBox="0 0 36 24"><rect x="1" y="2" width="34" height="20" rx="3"/><path d="M9.5 2v11M18 2v11M26.5 2v11"/></svg>
+        <span class="o-line"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= UNTERRICHT ======================= -->
+  <section id="lessons" class="section-alt">
+    <div class="container">
+      <div class="section-head has-spine">
+        <p class="kicker" data-i18n="lessons_kicker">Klavierunterricht</p>
+        <h2 data-i18n="lessons_title">わかのピアノ教室 · Wakas Klavierschule</h2>
+        <p class="section-intro" data-i18n="lessons_intro">Ich unterrichte Kinder, Jugendliche und Erwachsene – von Anfängerinnen und Anfängern bis zu Fortgeschrittenen. Herzlich willkommen sind alle, die Lust auf Musik haben.</p>
+        <div class="spine" aria-hidden="true">
+          <span class="spine-seal">和</span>
+          <span class="spine-text" lang="ja">わかのピアノ教室</span>
+        </div>
+      </div>
+
+      <div class="features">
+        <div class="feature">
+          <div class="f-ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4v-4h4v-4h4V8h4V4"/></svg></div>
+          <h3 data-i18n="f1_t">Jedes Alter, jedes Level</h3>
+          <p data-i18n="f1_d">Vom Kindergarten- bis ins Seniorenalter, vom ersten Anschlag bis zum fortgeschrittenen Spiel – willkommen ist jeder.</p>
+        </div>
+        <div class="feature">
+          <div class="f-ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="15" r="2.5"/></svg></div>
+          <h3 data-i18n="f2_t">Klassik bis Ghibli</h3>
+          <p data-i18n="f2_d">Neben klassischer Musik unterrichte ich Pop, Studio-Ghibli-Stücke, Kinderlieder sowie Anime- und Filmmusik – im Mittelpunkt stehen Ihre Interessen.</p>
+        </div>
+        <div class="feature">
+          <div class="f-ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c-5 0-9 3.6-9 8 0 2.5 1.4 4.7 3.5 6.1L5 21l4.3-1.6c.9.2 1.8.4 2.7.4 5 0 9-3.6 9-8s-4-8-9-8z"/></svg></div>
+          <h3 data-i18n="f3_t">Auf Deutsch oder Japanisch</h3>
+          <p data-i18n="f3_d">Der Unterricht ist auf Deutsch oder auf Japanisch möglich – ganz wie es für Sie am angenehmsten ist.</p>
+        </div>
+        <div class="feature">
+          <div class="f-ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21C8 17.5 3 14 3 9.5 3 6.5 5.5 4.5 8 4.5c1.6 0 3 .8 4 2.1 1-1.3 2.4-2.1 4-2.1 2.5 0 5 2 5 5 0 4.5-5 8-9 11.5z"/></svg></div>
+          <h3 data-i18n="f4_t">Einfühlsam &amp; sorgfältig</h3>
+          <p data-i18n="f4_d">Ich vermittele eine solide Technik und begleite Sie Schritt für Schritt. Für Auftritte und Wettbewerbe gebe ich gerne Impulse aus eigener Bühnenerfahrung.</p>
+        </div>
+      </div>
+
+      <figure class="quote">
+        <svg class="bloom" viewBox="0 0 24 24" aria-hidden="true"><g fill="#c98f95"><path d="M12 12C10.2 8.9 10.6 5.7 12 3.5c1.4 2.2 1.8 5.4 0 8.5z"/><path d="M12 12C10.2 8.9 10.6 5.7 12 3.5c1.4 2.2 1.8 5.4 0 8.5z" transform="rotate(72 12 12)"/><path d="M12 12C10.2 8.9 10.6 5.7 12 3.5c1.4 2.2 1.8 5.4 0 8.5z" transform="rotate(144 12 12)"/><path d="M12 12C10.2 8.9 10.6 5.7 12 3.5c1.4 2.2 1.8 5.4 0 8.5z" transform="rotate(216 12 12)"/><path d="M12 12C10.2 8.9 10.6 5.7 12 3.5c1.4 2.2 1.8 5.4 0 8.5z" transform="rotate(288 12 12)"/></g><circle cx="12" cy="12" r="1.7" fill="#a8875a"/></svg>
+        <blockquote data-i18n="lessons_quote">In meinem Unterricht lege ich großen Wert auf gegenseitigen Respekt und eine sorgfältige, einfühlsame Begleitung.</blockquote>
+      </figure>
+
+      <div class="sub-head">
+        <p class="kicker" data-i18n="prices_kicker">Einheiten &amp; Preise</p>
+        <h3 data-i18n="prices_title">Preise</h3>
+      </div>
+      <div class="prices">
+        <div class="price-card">
+          <p class="p-dur">30 <span data-i18n="price_unit">Minuten</span></p>
+          <p class="p-amount" data-i18n="p1_val">35&nbsp;€</p>
+        </div>
+        <div class="price-card">
+          <p class="p-dur">45 <span data-i18n="price_unit">Minuten</span></p>
+          <p class="p-amount" data-i18n="p2_val">45&nbsp;€</p>
+        </div>
+        <div class="price-card">
+          <p class="p-dur">60 <span data-i18n="price_unit">Minuten</span></p>
+          <p class="p-amount" data-i18n="p3_val">55&nbsp;€</p>
+        </div>
+      </div>
+      <p class="prices-note" data-i18n="prices_note">Alle Preise gelten pro Unterrichtseinheit im Einzelunterricht. Vereinbaren Sie gerne eine unverbindliche Schnupperstunde.</p>
+
+      <div class="loc-box">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+        <div>
+          <h3 data-i18n="loc_title">Unterrichtsorte</h3>
+          <p data-i18n="loc_text">In Frankfurt am Main und Eschborn – bei mir, bei Ihnen zu Hause oder an einem vereinbarten Ort im Rhein-Main-Gebiet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= ALS PIANISTIN ======================= -->
+  <section id="pianist">
+    <span class="watermark" aria-hidden="true">音</span>
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker" data-i18n="pianist_kicker">Als Pianistin</p>
+        <h2 data-i18n="pianist_title">Musik für Ihre Bühne</h2>
+      </div>
+      <p class="section-intro" data-i18n="pianist_text">Sie planen ein Konzert, eine Feier oder einen Gottesdienst – oder suchen eine Begleiterin für Violine und Gesang? Ich trete gerne auf: als Solistin, in der Kammermusik oder als einfühlsame Partnerin am Klavier. Schreiben Sie mir – gemeinsam finden wir die passende Musik für Ihren Anlass.</p>
+
+      <ul class="p-chips">
+        <li class="chip" data-i18n="pc1">Solokonzerte</li>
+        <li class="chip" data-i18n="pc2">Kammermusik</li>
+        <li class="chip" data-i18n="pc3">Begleitung für Violine &amp; Gesang</li>
+        <li class="chip" data-i18n="pc4">Kirchen &amp; Konzertsäle</li>
+        <li class="chip" data-i18n="pc5">Private Feiern</li>
+        <li class="chip" data-i18n="pc6">Soziale Einrichtungen</li>
+      </ul>
+
+      <figure class="quote-frame">
+        <blockquote data-i18n="pianist_quote">Meine künstlerische Vollendung erreiche ich beispielsweise in den Werken Robert Schumanns – Beethoven und Brahms bilden daneben das Herz meines Repertoires.</blockquote>
+        <figcaption data-i18n="quote_by">— Waka Yamada</figcaption>
+      </figure>
+
+      <div class="pianist-cta">
+        <a class="btn btn-primary" href="mailto:waka.pianomusic@gmail.com" data-i18n="pianist_cta">Anfrage als Pianistin senden</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= KONZERTE ======================= -->
+  <!-- Um ein Konzert hinzuzufügen: siehe Array "CONCERTS" im <script> am Ende
+       dieser Datei. / To add a concert: see the "CONCERTS" array in the
+       <script> at the end of this file. -->
+  <section id="concerts" class="section-alt">
+    <div class="container">
+      <div class="section-head" style="text-align:center">
+        <p class="kicker" style="justify-content:center" data-i18n="concerts_kicker">Konzerte</p>
+        <h2 data-i18n="concerts_title">Wo Sie mich erleben können</h2>
+      </div>
+      <div class="concert-list" id="concert-list"></div>
+      <!--<div class="concert-empty" data-i18n="concerts_empty">-->
+        <!-- Wird per JavaScript befüllt / filled by JavaScript -->
+      </div>
+  </section>
+
+  <!-- ======================= KONTAKT ======================= 
+  <section id="contact">
+    <div class="container">
+      <div class="contact-card">
+        <div class="contact-copy">
+          <p class="kicker" data-i18n="contact_kicker">Kontakt</p>
+          <h2 data-i18n="contact_title">Ich freue mich auf Ihre Nachricht</h2>
+          <p class="contact-text" data-i18n="contact_text">Ob Schnupperstunde, regelmäßiger Unterricht oder eine Anfrage als Pianistin – melden Sie sich gerne per E-Mail. Ich antworte in der Regel innerhalb weniger Tage.</p>
+        </div>
+        <div class="contact-rows">
+          <div class="c-row">
+            <span class="row-ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+            <div>
+              <p class="row-label" data-i18n="label_email">E-Mail</p>
+              <p class="row-value"><a href="mailto:waka.pianomusic@gmail.com">waka.pianomusic@gmail.com</a></p>
+              <div class="row-actions">
+                <a class="btn btn-primary btn-sm" href="mailto:waka.pianomusic@gmail.com" data-i18n="cta_email">E-Mail schreiben</a>
+                <button class="btn btn-ghost btn-sm" id="copyEmail" type="button" data-i18n="copy">E-Mail-Adresse kopieren</button>
+              </div>
+            </div>
+          </div>
+          <div class="c-row">
+            <span class="row-ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+            <div>
+              <p class="row-label" data-i18n="label_loc">Unterrichtsorte</p>
+              <p class="row-value" data-i18n="value_loc">Frankfurt am Main &amp; Eschborn</p>
+            </div>
+          </div>
+          <div class="c-row">
+            <span class="row-ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/></svg></span>
+            <div>
+              <p class="row-label" data-i18n="label_langs">Unterrichtssprachen</p>
+              <p class="row-value" data-i18n="value_langs">Deutsch &amp; Japanisch</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>-->
+  
+<section id="contact">
+  <div class="container">
+    <div class="contact-card2">
+      <svg class="sakura-mark" viewBox="0 0 40 40" aria-hidden="true"><g fill="currentColor"><ellipse cx="20" cy="11" rx="6.5" ry="9.5"/><ellipse cx="20" cy="11" rx="6.5" ry="9.5" transform="rotate(72 20 20)"/><ellipse cx="20" cy="11" rx="6.5" ry="9.5" transform="rotate(144 20 20)"/><ellipse cx="20" cy="11" rx="6.5" ry="9.5" transform="rotate(216 20 20)"/><ellipse cx="20" cy="11" rx="6.5" ry="9.5" transform="rotate(288 20 20)"/></g></svg>
+      <h2 data-i18n="contact_kicker">Kontakt</h2>
+      <div class="rule"></div>
+      <p data-i18n="contact_text">Ob Schnupperstunde, regelmäßiger Unterricht oder eine Anfrage als Pianistin – melden Sie sich gerne per E-Mail. Ich antworte in der Regel innerhalb weniger Tage.</p>
+      <a class="btn btn-solid" href="mailto:waka.pianomusic@gmail.com" data-i18n="cta_email">E-Mail schreiben</a>
+      <span id="copyEmail" type="button" class="mail">waka.pianomusic@gmail.com</span>
+      
+      <!--<div class="row-actions"><button class="btn btn-ghost" id="copyEmail" type="button" data-i18n="copy">E-Mail-Adresse kopieren</button></div>-->
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ======================= FOOTER =======================
+<footer class="site-footer">
+  <div class="container">
+    <span class="footer-seal" aria-hidden="true">和</span>
+    <p class="footer-name">Waka Yamada <span lang="ja">· 山田和佳</span></p>
+    <p class="footer-jp" lang="ja">わかのピアノ教室</p>
+    <p class="footer-tag" data-i18n="footer_tag">Pianistin &amp; Klavierlehrerin in Frankfurt am Main und Eschborn</p>
+  </div>
+</footer> -->
+  
+<footer>
+  <p class="f-notes" aria-hidden="true">♪ ♫ ♪</p>
+  <p class="footer-name2">Waka Yamada <span lang="ja">· 山田和佳</span></p>
+  <p class="f-notes" lang="ja">わかのピアノ教室</p>
+  <p class="footer-tag2" data-i18n="footer_tag">Pianistin &amp; Klavierlehrerin in Eschborn, Frankfurt am Main und Umgebung</p>
+  <!--<p class="footer-copy2">© <span id="year">2025</span> Waka Yamada</p> 
+  <p>© 2025 Waka Yamada · 山田和佳 · Frankfurt am Main &amp; Eschborn</p>  -->
+  <p class="footer-copy">© <span id="year">2026</span> Waka Yamada</p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* =======================================================================
+     1) ÜBERSETZUNGEN / TRANSLATIONS / 翻訳
+     Texte hier anpassen – alle Elemente mit data-i18n="schlüssel" werden
+     automatisch aktualisiert. / Edit texts here – all elements with
+     data-i18n="key" update automatically.
+     ======================================================================= */
+  var I18N = {
+    de: {
+      doc_title: "Waka Yamada – Pianistin & Klavierlehrerin · Frankfurt am Main & Eschborn",
+      doc_desc: "Klavierunterricht auf Deutsch und Japanisch in Frankfurt am Main und Eschborn – für jedes Alter und jede Stufe. Konzert- und Unterrichtsanfragen an Pianistin Waka Yamada.",
+      skip: "Zum Inhalt springen",
+      nav_aria: "Hauptnavigation",
+      lang_label: "Sprache wählen",
+      nav_about: "Über mich", nav_lessons: "Unterricht", nav_pianist: "Als Pianistin", nav_concerts: "Konzerte", nav_contact: "Kontakt",
+      hero_kicker: "Pianistin · Klavierlehrerin",
+      hero_line: "Vom ersten Ton bis zur Bühne – einfühlsamer Klavierunterricht und Musik, die bleibt.",
+      hero_loc: "Frankfurt am Main · Eschborn",
+      hero_cta1: "Zum Unterricht", hero_cta2: "Kontakt",
+      chip1: "Deutsch & Japanisch", chip2: "Jedes Alter", chip3: "Anfänger – Fortgeschrittene",
+      about_kicker: "Über mich",
+      about_title: "Zwischen Tokio und Frankfurt – ein Leben mit dem Klavier",
+      portrait_alt: "Porträt von Waka Yamada",
+      bio1: "Meine musikalische Ausbildung begann in Japan, wo meine Eltern mich im Alter von vier Jahren am Klavier unterrichteten. Mein Vater ist Musiklehrer, und Musik spielt in meiner Familie eine zentrale Rolle – alle spielen entweder Klavier oder leben ihre musikalische Ader auf eine andere Weise. So entstand schon früh meine Begeisterung für Musik und für das Klavier.",
+      bio2: "Nach meinem Bachelorabschluss Klavier an der Tokyo University of the Arts im Jahr 2018 war ich in Japan als Klavierlehrerin tätig und unterrichtete Schülerinnen und Schüler aller Kenntnis- und Altersstufen – vom Kindergarten- bis zum Seniorenalter. Parallel dazu arbeitete ich regelmäßig als Begleiterin für Violine und Gesang, gab Solokonzerte und war in verschiedenen kammermusikalischen Projekten aktiv. Ein besonderes Highlight für mich als Pianistin war 2018 ein Konzert im Violine-Klavier-Duo in der Carnegie Hall in New York.",
+      bio3: "Seit 2021 lebe ich in Deutschland. Meine Klavierstudien setzte ich zunächst am Hamburger Konservatorium fort, wo ich meine Ausbildung um das Fach Cembalo erweiterte.",
+      bio4: "Schon seit meiner Schulzeit fühle ich mich besonders der Musik deutscher Komponisten verbunden. Die Möglichkeit, in dem kulturellen Umfeld zu leben und zu studieren, in dem viele dieser Werke entstanden sind, bedeutet mir sehr viel. Besonders intensiv beschäftige ich mich mit der Musik Robert Schumanns, Ludwig van Beethovens und Johannes Brahms'.",
+      bio5: "2023 begann ich mein Masterstudium im Fach Klavier bei Prof. Silke-Thora Matthies an der Hochschule für Musik Würzburg. Dort widmete ich mich neben dem solistischen Repertoire intensiv der Kammermusik und arbeitete mit Studierenden verschiedener Instrumente zusammen.",
+      bio6: "2025 schloss ich mein Studium mit Bestnote ab und begann anschließend ein Meisterklassenstudium, um meine künstlerische Entwicklung weiter zu vertiefen.",
+      bio7: "Neben Studium und Meisterkursen trat ich regelmäßig als Pianistin auf, unter anderem in Hamburg, Braunschweig, Karlstadt und Bayreuth, wo ich in Kirchen, Konzertsälen und sozialen Einrichtungen spielte.",
+      fact1_l: "Herkunft", fact1_v: "Kumamoto, Japan",
+      fact2_l: "Studium", fact2_v: "Tokyo University of the Arts (Bachelor) · Hochschule für Musik Würzburg (Master)",
+      fact3_l: "Meisterklasse", fact3_v: "Seit 2025 – nach Masterabschluss mit Bestnote",
+      fact4_l: "Schwerpunkt", fact4_v: "Robert Schumann · Beethoven · Brahms",
+      fact5_l: "Sprachen", fact5_v: "Deutsch · Japanisch · Englisch",
+      lessons_kicker: "Klavierunterricht",
+      lessons_title: "わかのピアノ教室 · Wakas Klavierschule",
+      lessons_intro: "Ich unterrichte Kinder, Jugendliche und Erwachsene – von Anfängerinnen und Anfängern bis zu Fortgeschrittenen. Herzlich willkommen sind alle, die Lust auf Musik haben.",
+      f1_t: "Jedes Alter, jedes Level",
+      f1_d: "Vom Kindergarten- bis ins Seniorenalter, vom ersten Anschlag bis zum fortgeschrittenen Spiel – willkommen ist jeder.",
+      f2_t: "Klassik bis Ghibli",
+      f2_d: "Neben klassischer Musik unterrichte ich Pop, Studio-Ghibli-Stücke, Kinderlieder sowie Anime- und Filmmusik – im Mittelpunkt stehen Ihre Interessen.",
+      f3_t: "Auf Deutsch oder Japanisch",
+      f3_d: "Der Unterricht ist auf Deutsch oder auf Japanisch möglich – ganz wie es für Sie am angenehmsten ist.",
+      f4_t: "Einfühlsam & sorgfältig",
+      f4_d: "Ich vermittele eine solide Technik und begleite Sie Schritt für Schritt. Für Auftritte und Wettbewerbe gebe ich gerne Impulse aus eigener Bühnenerfahrung.",
+      lessons_quote: "In meinem Unterricht lege ich großen Wert auf gegenseitigen Respekt und eine sorgfältige, einfühlsame Begleitung.",
+      prices_kicker: "Einheiten & Preise",
+      prices_title: "Preise",
+      price_unit: "Minuten",
+      price_badge: "Beliebt",
+      p1_val: "35 €", p2_val: "45 €", p3_val: "55 €",
+      prices_note: "Alle Preise gelten pro Unterrichtseinheit im Einzelunterricht. Vereinbaren Sie gerne eine unverbindliche Schnupperstunde.",
+      loc_title: "Unterrichtsorte",
+      loc_text: "In Frankfurt am Main und Eschborn – bei mir, bei Ihnen zu Hause oder an einem vereinbarten Ort im Rhein-Main-Gebiet.",
+      pianist_kicker: "Als Pianistin",
+      pianist_title: "Musik für Ihre Bühne",
+      pianist_text: "Sie planen ein Konzert, eine Feier oder einen Gottesdienst – oder suchen eine Begleiterin für Violine und Gesang? Ich trete gerne auf: als Solistin, in der Kammermusik oder als einfühlsame Partnerin am Klavier. Schreiben Sie mir – gemeinsam finden wir die passende Musik für Ihren Anlass.",
+      pc1: "Solokonzerte", pc2: "Kammermusik", pc3: "Begleitung für Violine & Gesang", pc4: "Kirchen & Konzertsäle", pc5: "Private Feiern", pc6: "Soziale Einrichtungen",
+      pianist_quote: "Meine künstlerische Vollendung erreiche ich beispielsweise in den Werken Robert Schumanns – Beethoven und Brahms bilden daneben das Herz meines Repertoires.",
+      quote_by: "— Waka Yamada",
+      pianist_cta: "Anfrage als Pianistin senden",
+      concerts_kicker: "Konzerte",
+      concerts_title: "Wo Sie mich erleben können",
+      concerts_empty: "Aktuell sind keine öffentlichen Konzerte geplant. Neue Termine erscheinen hier – ich freue mich auf Ihren Besuch.",
+      concert_time: "Uhrzeit",
+      concert_more: "Mehr erfahren",
+      contact_kicker: "Kontakt",
+      contact_title: "Ich freue mich auf Ihre Nachricht",
+      contact_text: "Ob Schnupperstunde, regelmäßiger Unterricht oder eine Anfrage als Pianistin – melden Sie sich gerne per E-Mail. Ich antworte in der Regel innerhalb weniger Tage.",
+      label_email: "E-Mail",
+      label_loc: "Unterrichtsorte",
+      value_loc: "Frankfurt am Main & Eschborn",
+      label_langs: "Unterrichtssprachen",
+      value_langs: "Deutsch & Japanisch",
+      cta_email: "E-Mail schreiben",
+      copy: "E-Mail-Adresse kopieren",
+      copied: "Kopiert!",
+      footer_tag: "Pianistin & Klavierlehrerin in Eschborn, Frankfurt am Main und Umgebung"
+    },
+    en: {
+      doc_title: "Waka Yamada – Pianist & Piano Teacher · Frankfurt am Main & Eschborn",
+      doc_desc: "Piano lessons in German and Japanese in Frankfurt am Main and Eschborn – for every age and every level. Concert and teaching enquiries for pianist Waka Yamada.",
+      skip: "Skip to content",
+      nav_aria: "Main navigation",
+      lang_label: "Choose language",
+      nav_about: "About", nav_lessons: "Lessons", nav_pianist: "Performances", nav_concerts: "Concerts", nav_contact: "Contact",
+      hero_kicker: "Pianist · Piano Teacher",
+      hero_line: "From the very first note to the stage – empathetic piano lessons and music that stays with you.",
+      hero_loc: "Frankfurt am Main · Eschborn",
+      hero_cta1: "Piano Lessons", hero_cta2: "Get in Touch",
+      chip1: "German & Japanese", chip2: "Every age", chip3: "Beginners – Advanced",
+      about_kicker: "About Me",
+      about_title: "Between Tokyo and Frankfurt – a life with the piano",
+      portrait_alt: "Portrait of Waka Yamada",
+      bio1: "My musical training began in Japan, where my parents started teaching me the piano at the age of four. My father is a music teacher, and music plays a central role in my family – everyone either plays the piano or lives out their musical streak in another way. My love for music and for the piano awakened early.",
+      bio2: "After graduating with a Bachelor of Music (Piano) from the Tokyo University of the Arts in 2018, I worked as a piano teacher in Japan, teaching students of all levels and ages – from kindergarten to senior citizens. At the same time, I regularly worked as an accompanist for violin and voice, gave solo recitals and took part in various chamber music projects. A particular highlight for me as a pianist was a violin-piano duo concert at Carnegie Hall in New York in 2018.",
+      bio3: "I have lived in Germany since 2021. I first continued my piano studies at the Hamburger Konservatorium, where I also added harpsichord to my training.",
+      bio4: "Ever since my school days, I have felt a special connection to the music of German composers. The opportunity to live and study in the cultural environment in which many of these works were created means a great deal to me. I devote myself particularly intensively to the music of Robert Schumann, Ludwig van Beethoven and Johannes Brahms.",
+      bio5: "In 2023, I began my master's degree in piano with Prof. Silke-Thora Matthies at the Hochschule für Musik Würzburg. There, alongside the solo repertoire, I devoted myself intensively to chamber music and worked with students of various instruments.",
+      bio6: "In 2025, I completed my studies with top marks and subsequently embarked on a postgraduate masterclass programme to further deepen my artistic development.",
+      bio7: "Alongside my studies and masterclasses, I performed regularly as a pianist – in Hamburg, Braunschweig, Karlstadt and Bayreuth, among other places, playing in churches, concert halls and social institutions.",
+      fact1_l: "Origin", fact1_v: "Kumamoto, Japan",
+      fact2_l: "Studies", fact2_v: "Tokyo University of the Arts (Bachelor) · Hochschule für Musik Würzburg (Master)",
+      fact3_l: "Masterclass", fact3_v: "Since 2025 – following a master's degree with distinction",
+      fact4_l: "Focus", fact4_v: "Robert Schumann · Beethoven · Brahms",
+      fact5_l: "Languages", fact5_v: "German · Japanese · English",
+      lessons_kicker: "Piano Lessons",
+      lessons_title: "Waka's Piano School · わかのピアノ教室",
+      lessons_intro: "I teach children, teenagers and adults – from complete beginners to advanced players. Everyone with a love of music is warmly welcome.",
+      f1_t: "Every age, every level",
+      f1_d: "From kindergarten age to the golden years, from a first touch of the keys to advanced playing – everyone is welcome.",
+      f2_t: "From classical to Ghibli",
+      f2_d: "Alongside classical music I teach pop, Studio Ghibli pieces, children's songs, anime and film music – the focus is on your interests.",
+      f3_t: "In German or Japanese",
+      f3_d: "Lessons can be held in German or in Japanese – whichever feels most comfortable for you.",
+      f4_t: "Empathetic & attentive",
+      f4_d: "I build a solid technique with you and guide you step by step. Drawing on my own stage experience, I gladly offer impulses for performances and competitions.",
+      lessons_quote: "In my lessons I place great value on mutual respect and careful, empathetic guidance.",
+      prices_kicker: "Sessions & Fees",
+      prices_title: "Fees",
+      price_unit: "min",
+      price_badge: "Popular",
+      p1_val: "€35", p2_val: "€45", p3_val: "€55",
+      prices_note: "All prices are per private lesson. Feel free to arrange a no-obligation trial lesson.",
+      loc_title: "Lesson locations",
+      loc_text: "In Frankfurt am Main and Eschborn – at my home, at your home, or at an agreed location in the Rhine-Main area.",
+      pianist_kicker: "As a Pianist",
+      pianist_title: "Music for your stage",
+      pianist_text: "Planning a concert, a celebration or a church service – or looking for an accompanist for violin and voice? I gladly perform as a soloist, as a chamber musician, or as a sensitive partner at the piano. Write to me – together we will find the right music for your occasion.",
+      pc1: "Solo recitals", pc2: "Chamber music", pc3: "Accompaniment for violin & voice", pc4: "Churches & concert halls", pc5: "Private celebrations", pc6: "Social institutions",
+      pianist_quote: "My artistry reaches its fullest expression, for instance, in the works of Robert Schumann – alongside Beethoven and Brahms, they form the heart of my repertoire.",
+      quote_by: "— Waka Yamada",
+      pianist_cta: "Send an enquiry",
+      concerts_kicker: "Concerts",
+      concerts_title: "Where you can hear me",
+      concerts_empty: "There are no public concerts scheduled at the moment. New dates will appear here – I look forward to seeing you.",
+      concert_time: "Time",
+      concert_more: "Find out more",
+      contact_kicker: "Contact",
+      contact_title: "I look forward to your message",
+      contact_text: "Whether a trial lesson, regular tuition or an engagement enquiry – feel free to write to me by e-mail. I usually reply within a few days.",
+      label_email: "E-mail",
+      label_loc: "Lesson locations",
+      value_loc: "Frankfurt am Main & Eschborn",
+      label_langs: "Teaching languages",
+      value_langs: "German & Japanese",
+      cta_email: "Write an e-mail",
+      copy: "Copy e-mail address",
+      copied: "Copied!",
+      footer_tag: "Pianist & Piano Teacher in Eschborn, Frankfurt am Main and surrounding areas"
+    },
+    ja: {
+      doc_title: "山田和佳 – ピアニスト・ピアノ講師 · フランクフルト & エシュボルン",
+      doc_desc: "フランクフルト・アム・マインとエシュボルンでのピアノ・レッスン。ドイツ語と日本語で、どなたでも歓迎。ピアニスト山田和佳への演奏・レッスンのお問い合わせも承ります。",
+      skip: "本文へスキップ",
+      nav_aria: "メインナビゲーション",
+      lang_label: "言語を選択",
+      nav_about: "プロフィール", nav_lessons: "レッスン", nav_pianist: "演奏のご依頼", nav_concerts: "コンサート", nav_contact: "お問い合わせ",
+      hero_kicker: "ピアニスト · ピアノ講師",
+      hero_line: "はじめての音から舞台まで――やさしく寄り添うピアノ・レッスンと、心に残る音楽を。",
+      hero_loc: "フランクフルト・アム・マイン · エシュボルン",
+      hero_cta1: "レッスンのご案内", hero_cta2: "お問い合わせ",
+      chip1: "ドイツ語と日本語", chip2: "年齢を問わず", chip3: "初心者から上級者まで",
+      about_kicker: "プロフィール",
+      about_title: "東京からフランクフルトへ――ピアノとともに",
+      portrait_alt: "山田和佳のポートレート",
+      bio1: "私の音楽的な歩みは、日本で始まりました。4歳の頃、両親がピアノを教えてくれたのが始まりです。父は音楽教師で、音楽は私の家族の中心にあります――家族全員がピアノを演奏するか、それぞれの形で音楽的な才能を生かしています。こうして幼い頃から、音楽とピアノへの情熱が育まれました。",
+      bio2: "2018年、東京藝術大学でピアノの学士課程を修了した後、日本でピアノ講師として、幼稚園児からご高齢の方まで、あらゆるレベル・年齢の生徒さんを教えてきました。並行して、ヴァイオリンと声楽の伴奏者として定期的に活動し、ソロコンサートやさまざまな室内楽プロジェクトにも参加しました。特に思い出深いのは、2018年にニューヨークのカーネギー・ホールで行ったヴァイオリンとピアノのデュオコンサートです。",
+      bio3: "2021年からドイツに暮らしています。まずハンブルク音楽院（Hamburger Konservatorium）でピアノの勉強を続け、チェンバロも学びました。",
+      bio4: "学生時代から、ドイツの作曲家たちの音楽に特別な思いを抱いてきました。これらの作品が生まれた文化的な環境で暮らし、学べることは、私にとって大きな意味を持っています。特にロベルト・シューマン、ルートヴィヒ・ヴァン・ベートーヴェン、ヨハネス・ブラームスの音楽に深く取り組んでいます。",
+      bio5: "2023年、ヴュルツブルク音楽大学（Hochschule für Musik Würzburg）でProf. Silke-Thora Matthiesのもと、ピアノの修士課程を始めました。ソロのレパートリーに加えて室内楽にも力を入れ、さまざまな楽器の学生たちと共演しました。",
+      bio6: "2025年、最優秀の成績で修士課程を修了し、さらに芸術性を深めるため、マスタークラス課程に進みました。",
+      bio7: "学業やマスタークラスのかたわら、ハンブルク、ブラウンシュヴァイク、カールシュタット、バイロイトなどで定期的に演奏し、教会、コンサートホール、社会福祉施設でも演奏してきました。",
+      fact1_l: "出身", fact1_v: "日本・熊本",
+      fact2_l: "学歴", fact2_v: "東京藝術大学（学士）・ ヴュルツブルク音楽大学（修士）",
+      fact3_l: "マスタークラス", fact3_v: "2025年より（修士課程を最優秀で修了後）",
+      fact4_l: "中心的レパートリー", fact4_v: "ロベルト・シューマン · ベートーヴェン · ブラームス",
+      fact5_l: "言語", fact5_v: "ドイツ語 · 日本語 · 英語",
+      lessons_kicker: "ピアノレッスン",
+      lessons_title: "わかのピアノ教室",
+      lessons_intro: "子どもから大人まで、はじめての方から経験者まで、どなたでも歓迎します。音楽が好きな方のお手伝いをさせていただきます。",
+      f1_t: "年齢もレベルも問わず",
+      f1_d: "幼稚園のお子さまからシニアの方まで、ピアノとの出会いから上級の演奏まで、どなたでも歓迎します。",
+      f2_t: "クラシックからジブリまで",
+      f2_d: "クラシックに加えて、ポップス、ジブリの作品、童謡、アニメや映画の音楽まで。ジャンルよりも、生徒さん一人ひとりの興味を大切にしています。",
+      f3_t: "ドイツ語でも日本語でも",
+      f3_d: "レッスンはドイツ語と日本語のどちらでもお選びいただけます。",
+      f4_t: "やさしく、丁寧に",
+      f4_d: "確かなテクニックを基礎から、一歩一歩。自身の舞台経験から、本番やコンクールへ向けてのアドバイスもお任せください。",
+      lessons_quote: "レッスンでは、お互いへの敬意と、丁寧で寄り添った指導を何よりも大切にしています。",
+      prices_kicker: "レッスン時間と料金",
+      prices_title: "料金",
+      price_unit: "分",
+      price_badge: "人気",
+      p1_val: "€35", p2_val: "€45", p3_val: "€55",
+      prices_note: "料金は個人レッスン1回あたりです。まずは気軽に体験レッスンをご相談ください。",
+      loc_title: "レッスン場所",
+      loc_text: "フランクフルト・アム・マインとエシュボルンで。講師の自宅、ご自宅への出張、またはライン=マイン地域の指定場所でも承ります。",
+      pianist_kicker: "演奏のご依頼",
+      pianist_title: "あなたの舞台に、音楽を。",
+      pianist_text: "コンサートやお祝いの席、教会の礼拝の企画、あるいはヴァイオリン・声楽の伴奏者をお探しではありませんか？ソロ、室内楽、そして心を込めた伴奏演奏まで、喜んでお引き受けします。ご連絡いただければ、機会にふさわしい音楽を一緒に見つけましょう。",
+      pc1: "ソロリサイタル", pc2: "室内楽", pc3: "ヴァイオリン・声楽の伴奏", pc4: "教会・コンサートホール", pc5: "私的なお祝いの席", pc6: "社会福祉施設での演奏",
+      pianist_quote: "私の芸術は、たとえばロベルト・シューマンの作品において最も高い境地に達します。ベートーヴェンとブラームスも、私のレパートリーの核を成しています。",
+      quote_by: "―― 山田和佳",
+      pianist_cta: "演奏のご依頼を送る",
+      concerts_kicker: "コンサート",
+      concerts_title: "演奏会のご案内",
+      concerts_empty: "現在、公開予定のコンサートはございません。新しい日程はこちらに掲載されます。お会いできるのを楽しみにしています。",
+      concert_time: "開演",
+      concert_more: "詳しくはこちら",
+      contact_kicker: "お問い合わせ",
+      contact_title: "お気軽にご連絡ください",
+      contact_text: "体験レッスン、継続したレッスン、演奏のご依頼など、メールでお気軽にお問い合わせください。通常、数日以内にご返信いたします。",
+      label_email: "メール",
+      label_loc: "レッスン場所",
+      value_loc: "フランクフルト・アム・マイン・エシュボルン",
+      label_langs: "レッスン言語",
+      value_langs: "ドイツ語と日本語",
+      cta_email: "メールを書く",
+      copy: "メールアドレスをコピー",
+      copied: "コピーしました！",
+      footer_tag: "フランクフルト・アム・マインとエシュボルン周辺のピアニスト・ピアノ講師"
+    }
+  };
+
+  var LOCALES = { de: "de-DE", en: "en-GB", ja: "ja-JP" };
+
+  /* =======================================================================
+     2) KONZERTE / CONCERTS / コンサート
+     -----------------------------------------------------------------------
+     So fügen Sie ein neues Konzert hinzu (Beispiel):
+     How to add a new concert (example):
+     新しいコンサートの追加方法（例）:
+
+     const CONCERTS = [
+       {
+         date:  "2026-04-18",               // Datum / date / 日付 (JJJJ-MM-TT)
+         time:  "19:00",                    // Beginn / start time / 開演
+         title: "Schumann – Kinderszenen",  // Programm / programme / プログラム
+         venue: "Haus am Dom",              // Saal / venue / 会場
+         city:  "Frankfurt am Main",        // Stadt / city / 都市
+         link:  ""                          // optional: Link / optional link / 詳細リンク（任意）
+       }
+     ];
+
+     Die Website aktualisiert sich automatisch beim Neuladen der Seite.
+     The website updates automatically when the page is reloaded.
+     ページを再読み込みすると自動的に反映されます。
+     ======================================================================= */
+  var CONCERTS = [
+    // Aktuell keine Konzerte / currently no concerts / 現在予定なし
+  ];
+
+  /* =======================================================================
+     3) SPRACHUMSCHALTUNG / LANGUAGE SWITCHING
+     ======================================================================= */
+  var EMAIL = "waka.pianomusic@gmail.com";
+  var lang;
+
+  var stored = null;
+  try { stored = localStorage.getItem("waka-lang"); } catch(e){}
+  if (stored && I18N[stored]) {
+    lang = stored;
+  } else {
+    var nav = (navigator.language || "de").toLowerCase();
+    lang = nav.indexOf("ja") === 0 ? "ja" : (nav.indexOf("en") === 0 ? "en" : (nav.indexOf("de") === 0 ? "de" : "de"));
+  }
+
+  function applyLang(l){
+    lang = l;
+    try { localStorage.setItem("waka-lang", l); } catch(e){}
+    document.documentElement.lang = l;
+    document.title = I18N[l].doc_title;
+    var md = document.querySelector('meta[name="description"]');
+    if (md) md.setAttribute("content", I18N[l].doc_desc);
+
+    var nodes = document.querySelectorAll("[data-i18n]");
+    for (var i = 0; i < nodes.length; i++) {
+      var k = nodes[i].getAttribute("data-i18n");
+      if (I18N[l][k] != null) nodes[i].textContent = I18N[l][k];
+    }
+    nodes = document.querySelectorAll("[data-i18n-aria]");
+    for (i = 0; i < nodes.length; i++) {
+      k = nodes[i].getAttribute("data-i18n-aria");
+      if (I18N[l][k] != null) nodes[i].setAttribute("aria-label", I18N[l][k]);
+    }
+    nodes = document.querySelectorAll("[data-i18n-alt]");
+    for (i = 0; i < nodes.length; i++) {
+      k = nodes[i].getAttribute("data-i18n-alt");
+      if (I18N[l][k] != null) nodes[i].setAttribute("alt", I18N[l][k]);
+    }
+    var btns = document.querySelectorAll(".lang-btn");
+    for (i = 0; i < btns.length; i++) {
+      var on = btns[i].getAttribute("data-lang") === l;
+      btns[i].setAttribute("aria-pressed", on ? "true" : "false");
+      btns[i].classList.toggle("is-active", on);
+    }
+    renderConcerts();
+  }
+
+  /* =======================================================================
+     4) KONZERTE RENDERN / RENDER CONCERTS
+     ======================================================================= */
+  function renderConcerts(){
+    var wrap = document.getElementById("concert-list");
+    var t = I18N[lang];
+    wrap.innerHTML = "";
+
+    if (!CONCERTS.length) {
+      var empty = document.createElement("p");
+      empty.className = "concert-empty";
+      empty.innerHTML =
+        '<svg class="bloom" viewBox="0 0 24 24" aria-hidden="true"><g fill="#c98f95">' +
+        '<path d="M12 12C10.2 8.9 10.6 5.7 12 3.5c1.4 2.2 1.8 5.4 0 8.5z"/>' +
+        '<path d="M12 12C10.2 8.9 10.6 5.7 12 3.5c1.4 2.2 1.8 5.4 0 8.5z" transform="rotate(72 12 12)"/>' +
+        '<path d="M12 12C10.2 8.9 10.6 5.7 12 3.5c1.4 2.2 1.8 5.4 0 8.5z" transform="rotate(144 12 12)"/>' +
+        '<path d="M12 12C10.2 8.9 10.6 5.7 12 3.5c1.4 2.2 1.8 5.4 0 8.5z" transform="rotate(216 12 12)"/>' +
+        '<path d="M12 12C10.2 8.9 10.6 5.7 12 3.5c1.4 2.2 1.8 5.4 0 8.5z" transform="rotate(288 12 12)"/></g>' +
+        '<circle cx="12" cy="12" r="1.7" fill="#a8875a"/></svg><span></span>';
+      empty.querySelector("span").textContent = t.concerts_empty;
+      wrap.appendChild(empty);
+      return;
+    }
+
+    for (var i = 0; i < CONCERTS.length; i++) {
+      var c = CONCERTS[i];
+      var d = new Date(c.date + "T00:00:00");
+      var day  = new Intl.DateTimeFormat(LOCALES[lang], { day: "numeric" }).format(d);
+      var rest = new Intl.DateTimeFormat(LOCALES[lang], { month: "short", year: "numeric" }).format(d);
+      var metaParts = [];
+      var place = [c.venue, c.city].filter(Boolean).join(" · ");
+      if (place) metaParts.push(place);
+      if (c.time) metaParts.push(t.concert_time + ": " + c.time);
+
+      var card = document.createElement("article");
+      card.className = "concert-card";
+      card.innerHTML =
+        '<div class="c-date"><span class="c-day"></span><span class="c-rest"></span></div>' +
+        '<div class="c-info"><h3 class="c-title"></h3>' +
+        (metaParts.length ? '<p class="c-meta"></p>' : "") +
+        (c.link ? '<a class="c-link" target="_blank" rel="noopener"></a>' : "") +
+        "</div>";
+      card.querySelector(".c-day").textContent = day;
+      card.querySelector(".c-rest").textContent = rest;
+      card.querySelector(".c-title").textContent = c.title || "";
+      if (metaParts.length) card.querySelector(".c-meta").textContent = metaParts.join(" · ");
+      if (c.link) {
+        var a = card.querySelector(".c-link");
+        a.href = c.link;
+        a.textContent = t.concert_more + " →";
+      }
+      wrap.appendChild(card);
+    }
+  }
+
+  /* =======================================================================
+     5) KLEINIGKEITEN / SMALL FEATURES
+     ======================================================================= */
+  // E-Mail kopieren (sanfte Bestätigung, kein Popup) / copy e-mail gently
+  var toastTimer;
+  function showToast(msg){
+    var el = document.getElementById("toast");
+    el.textContent = msg;
+    el.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ el.classList.remove("show"); }, 2200);
+  }
+  function legacyCopy(){
+    var ta = document.createElement("textarea");
+    ta.value = EMAIL;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); showToast(I18N[lang].copied); } catch(e){}
+    document.body.removeChild(ta);
+  }
+  document.getElementById("copyEmail").addEventListener("click", function(){
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(EMAIL).then(function(){
+        showToast(I18N[lang].copied);
+      }, legacyCopy);
+    } else { legacyCopy(); }
+  });
+
+  // Sprachbuttons / language buttons
+  var btns = document.querySelectorAll(".lang-btn");
+  for (var b = 0; b < btns.length; b++) {
+    btns[b].addEventListener("click", function(){
+      applyLang(this.getAttribute("data-lang"));
+    });
+  }
+
+  // Sanfter Schatten am Header / gentle header shadow
+  var header = document.getElementById("siteHeader");
+  window.addEventListener("scroll", function(){
+    header.classList.toggle("scrolled", window.scrollY > 8);
+  }, { passive: true });
+
+  // Aktiven Navigationspunkt markieren / highlight active nav item
+  var navLinks = document.querySelectorAll(".main-nav a");
+  var linkMap = {};
+  for (var n = 0; n < navLinks.length; n++) linkMap[navLinks[n].getAttribute("href").slice(1)] = navLinks[n];
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) {
+          for (var j = 0; j < navLinks.length; j++) navLinks[j].classList.remove("is-active");
+          var a = linkMap[en.target.id];
+          if (a) a.classList.add("is-active");
+        }
+      });
+    }, { rootMargin: "-40% 0px -55% 0px" });
+    ["about","lessons","pianist","concerts","contact"].forEach(function(id){
+      var s = document.getElementById(id);
+      if (s) io.observe(s);
+    });
+  }
+
+  // Jahr im Footer / footer year
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Initiales Rendering / initial render
+  applyLang(lang);
+})();
+</script>
+
+</body>
+</html>
